@@ -2,17 +2,32 @@ package XML;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
  
 public class GrabXML{
+		
+	final String INDEX_URL = "http://www.index.hr/";
+	private static ArrayList<String> newsList;
+	private static ArrayList<String> linkList;
+	
+	public GrabXML(){
+		newsList = new ArrayList<String>();
+		linkList = new ArrayList<String>();
+	}
 	
 	public static void main(String[] args) throws Exception{
 		
-		System.out.println(newsName("http://www.index.hr/"));
-		System.out.println(grabLink("http://www.index.hr/"));
+		//System.out.println(newsName("http://www.index.hr/"));
+		//System.out.println(grabLink("http://www.index.hr/"));
+		GrabXML xml = new GrabXML();
+		SQLiteJDBC db = new SQLiteJDBC();
+		db.createDatabase();
+		db.insertData();
+		db.grabData();
 	}
 	
 	
-	public static String newsName(String urlAddress) {
+	public static void newsName(String urlAddress) {
 		try{
 		   //Set URL
 		   URL url = new URL(urlAddress);
@@ -35,19 +50,18 @@ public class GrabXML{
 				   int lastPos = temp.indexOf("\"");
 				   temp = temp.substring(0, lastPos);
 				   strLine += temp + "\n";
+				   newsList.add(strLine);
 			   }
 		   }
 		   in.close();
-		   return strLine;
 		} catch (MalformedURLException ue){
 			System.out.print("Malformed URL");
 		} catch (IOException ioe){
 			System.out.println("Something went wrong reading the contents");
 		}
-		return null;
 	}
 	
-	public static String grabLink(String urlAddress) {
+	public static void grabLink(String urlAddress) {
 		try{
 		   //Set URL
 		   URL url = new URL(urlAddress);
@@ -73,16 +87,15 @@ public class GrabXML{
 				   int lastPos = tem.indexOf("\"");
 				   tem = tem.substring(0, lastPos);
 				   strLink += tem + "\n";
+				   linkList.add(strLink);
 			   }
 		   }
 		   in.close();
-		   return strLink;
 		} catch (MalformedURLException ue){
 			System.out.print("Malformed URL");
 		} catch (IOException ioe){
 			System.out.println("Something went wrong reading the contents");
 		}
-		return null;
 	}
 	
 

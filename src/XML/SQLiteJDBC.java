@@ -2,8 +2,8 @@ package XML;
 
 import java.sql.*;
 
-public class SQLiteJDBC
-{
+public class SQLiteJDBC{
+	
 	Connection c = null;
 	Statement stmt = null;
 	String sql = "";
