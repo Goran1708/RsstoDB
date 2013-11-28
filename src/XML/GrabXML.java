@@ -6,9 +6,9 @@ import java.util.ArrayList;
  
 public class GrabXML{
 		
-	final String INDEX_URL = "http://www.index.hr/";
-	private static ArrayList<String> newsList;
-	private static ArrayList<String> linkList;
+	final static String INDEX_URL = "http://www.index.hr/";
+	public static ArrayList<String> newsList;
+	public static ArrayList<String> linkList;
 	
 	public GrabXML(){
 		newsList = new ArrayList<String>();
@@ -24,10 +24,13 @@ public class GrabXML{
 		db.createDatabase();
 		db.insertData();
 		db.grabData();
+		xml.newsName(INDEX_URL);
+		xml.grabLink(INDEX_URL);
+		
 	}
 	
 	
-	public static void newsName(String urlAddress) {
+	public void newsName(String urlAddress) {
 		try{
 		   //Set URL
 		   URL url = new URL(urlAddress);
@@ -61,7 +64,7 @@ public class GrabXML{
 		}
 	}
 	
-	public static void grabLink(String urlAddress) {
+	public void grabLink(String urlAddress) {
 		try{
 		   //Set URL
 		   URL url = new URL(urlAddress);

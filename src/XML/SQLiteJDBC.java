@@ -16,7 +16,7 @@ public class SQLiteJDBC{
     	      System.out.println("Opened database successfully");
     	      
     	      stmt = c.createStatement();
-    	      String sql = "DROP TABLE IF EXISTS NEWS";
+    	      String sql = "DROP TABLE IF EXISTS NEWS, LINKS";
     	      stmt.executeUpdate(sql);
     	      
     	      stmt = c.createStatement();
@@ -41,22 +41,20 @@ public class SQLiteJDBC{
     			c.setAutoCommit(false);
     			System.out.println("Opened database successfully");
       
+    			for(int i = 0; i < newsList.size(); i++){
     			stmt = c.createStatement();
-    			sql = "INSERT INTO NEWS (ID,NAME,LINK) " +
-    					"VALUES (1, 'Ivan', 'www.bla1.com' );"; 
+    			sql = "INSERT INTO NEWS (ID,NAME) " +
+    					"VALUES (i, newsList);"; 
     			stmt.executeUpdate(sql);
-
-    			sql = "INSERT INTO NEWS (ID,NAME,LINK) " +
-    					"VALUES (2, 'Dan', 'www.bla2.com' );"; 
-    			stmt.executeUpdate(sql);
-
-			    sql = "INSERT INTO NEWS (ID,NAME,LINK) " +
-			    		  "VALUES (3, 'Man', 'www.bla3.com' );"; 
-		        stmt.executeUpdate(sql);
-		      
-		        sql = "INSERT INTO NEWS (ID,NAME,LINK) " +
-		    		  "VALUES (4, 'Mark', 'www.bla4.com' );"; 
-		        stmt.executeUpdate(sql);
+    			}
+    			
+    			for(int i = 0; i < newsLink.size(); i++){
+        			stmt = c.createStatement();
+        			sql = "INSERT INTO NEWS (LINK) " +
+        					"VALUES (, newsLink);"; 
+        			stmt.executeUpdate(sql);
+        			}
+          
       
 		        stmt.close();
 		        c.commit();
