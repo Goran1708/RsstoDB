@@ -5,13 +5,12 @@ import java.net.*;
  
 public class GrabXML{
 	
-
-
 	public static void main(String[] args) throws Exception{
 		
 		System.out.println(newsName("http://www.index.hr/"));
 		System.out.println(grabLink("http://www.index.hr/"));
 	}
+	
 	
 	public static String newsName(String urlAddress) {
 		try{
@@ -85,4 +84,6 @@ public class GrabXML{
 		}
 		return null;
 	}
+	
+
 }
